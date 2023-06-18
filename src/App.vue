@@ -44,10 +44,7 @@
         <q-toolbar>
           <q-btn dense flat icon="mdi-menu" round @click="leftDrawer = !leftDrawer" />
           <q-toolbar-title class="my-title" style="cursor: pointer" @click="router.push({ path: '/' })">
-            <q-avatar>
-              <img src="./assets/Jedlik_small.png" />
-            </q-avatar>
-            Jedlik
+            Tibor Blascsok Resume
           </q-toolbar-title>
           <q-btn flat icon="mdi-comment-text-multiple" @click="toggleLanguage">
             <q-badge color="red" floating :label="locale" />
