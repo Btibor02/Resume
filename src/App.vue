@@ -1,56 +1,59 @@
 <script setup lang="ts">
-  import { useI18n } from "vue-i18n";
-  import router from "src/router";
-  import { onMounted, ref } from "vue";
-  // import { Cookies } from "quasar";
+import { useI18n } from "vue-i18n";
+import router from "src/router";
+import { onMounted, ref } from "vue";
+// import { Cookies } from "quasar";
 
-  const leftDrawer = ref<boolean>(true);
+const leftDrawer = ref<boolean>(true);
 
-  let { locale, t } = useI18n();
+let { locale, t } = useI18n();
 
-  onMounted(() => {
-  });
+onMounted(() => {});
 
-  // Watch browser or browser page is close
-  window.addEventListener(
-    "beforeunload",
-    () => {
+// Watch browser or browser page is close
+window.addEventListener("beforeunload", () => {}, false);
+
+function menuItems() {
+  return [
+    {
+      icon: "mdi-home",
+      text: t("startPage"),
+      name: "startPage",
+      route: "/",
+      disabled: false,
+      separator: false,
     },
-    false
-  );
+  ];
+}
 
-  function menuItems() {
-    return [
-      {
-        icon: "mdi-home",
-        text: t("startPage"),
-        name: "startPage",
-        route: "/",
-        disabled: false,
-        separator: false,
-      },
-    ];
-  }
-
-  function toggleLanguage() {
-    locale.value = locale.value == "hu" ? "en" : "hu";
-  }
+function toggleLanguage() {
+  locale.value = locale.value == "hu" ? "en" : "hu";
+}
 </script>
 
 <template>
   <div class="q-pa-md">
     <q-layout view="hHh Lpr fFf">
-      <q-header class="bg-primary text-white text-left" elevated reveal>
+      <q-header style="background-color: #1f4987;" class="text-white text-left" elevated reveal>
         <q-toolbar>
-          <q-btn dense flat icon="mdi-menu" round @click="leftDrawer = !leftDrawer" />
-          <q-toolbar-title class="my-title" style="cursor: pointer" @click="router.push({ path: '/' })">
+          <q-btn
+            dense
+            flat
+            icon="mdi-menu"
+            round
+            @click="leftDrawer = !leftDrawer"
+          />
+          <q-toolbar-title
+            class="my-title"
+            style="cursor: pointer"
+            @click="router.push({ path: '/' })"
+          >
             Tibor Blascsok Resume
           </q-toolbar-title>
           <q-btn flat icon="mdi-comment-text-multiple" @click="toggleLanguage">
             <q-badge color="red" floating :label="locale" />
           </q-btn>
           <q-btn flat icon="mdi-theme-light-dark" @click="$q.dark.toggle" />
-          <q-btn dense flat icon="mdi-menu" round @click="leftDrawer = !leftDrawer" />
         </q-toolbar>
       </q-header>
 
@@ -66,7 +69,11 @@
           <!-- routes: -->
           <q-list>
             <template v-for="(menuItem, index) in menuItems()" :key="index">
-              <q-item clickable :disable="menuItem.disabled" :to="menuItem.route">
+              <q-item
+                clickable
+                :disable="menuItem.disabled"
+                :to="menuItem.route"
+              >
                 <q-item-section avatar>
                   <q-icon :name="menuItem.icon" />
                 </q-item-section>
@@ -81,11 +88,9 @@
         </q-scroll-area>
       </q-drawer>
 
-      <q-footer elevated reveal>
+      <q-footer style="background-color: #1f4987;" elevated reveal>
         <q-toolbar>
-          <q-toolbar-title class="text-center my-title">
-            Vite-Quasar minimal {{ $t("template") }} 2022 -
-          </q-toolbar-title>
+          <q-toolbar-title class="text-center my-title"> </q-toolbar-title>
         </q-toolbar>
       </q-footer>
 
@@ -101,26 +106,26 @@
 </template>
 
 <style lang="scss">
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 0.5s ease;
-  }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
 
-  .fade-enter-from,
-  .fade-leave-to {
-    opacity: 0;
-  }
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 
-  .my-title {
-    font-size: 10px;
-    @media (min-width: 400px) {
-      font-size: calc(10px + 0.5vw);
-    }
-    @media (min-width: 800px) {
-      font-size: calc(14px + 0.5vw);
-    }
-    @media (min-width: 1200px) {
-      font-size: calc(18px + 0.5vw);
-    }
+.my-title {
+  font-size: 10px;
+  @media (min-width: 400px) {
+    font-size: calc(10px + 0.5vw);
   }
+  @media (min-width: 800px) {
+    font-size: calc(14px + 0.5vw);
+  }
+  @media (min-width: 1200px) {
+    font-size: calc(18px + 0.5vw);
+  }
+}
 </style>
